@@ -23,7 +23,7 @@ To use MyLib, include the necessary header files in your C++ project. The main h
 #include "mylib.hpp"
 ```
 
-For specific functionalities, you can include individual headers, for example:
+For specific functionalities, you can include individual headers, for example (note: these headers may change as the library evolves and you need to make sure the paths are all relative):
 
 ```cpp
 #include "solvers/dde_solvers.hpp"
@@ -32,18 +32,18 @@ For specific functionalities, you can include individual headers, for example:
 
 ## Examples
 
-Refer to the `Examples/` directory for various usage examples demonstrating how to utilize different parts of the library.
+Refer to the [`Examples/`](../Examples/) directory for various usage examples demonstrating how to utilize different parts of the library.
 
 ## Documentation Structure
 
 This documentation is organized into several files to provide a clear and detailed explanation of each module:
 
-- `overview.md`: General introduction and library structure.
-- `solvers.md`: Detailed documentation for ODE and DDE solvers.
-- `initializers.md`: Documentation for initial condition setup.
-- `network.md`: Documentation for network topology tools.
-- `models.md`: Documentation for implemented mathematical models.
-- `utility.md`: Documentation for general utility functions.
-- `linalg.md`: Documentation for linear algebra components.
-- `interpolators.md`: Documentation for interpolation methods.
-- `typedefs.md`: Documentation for custom type definitions.
+- `overview.md`: General introduction and library structure. [Overview](./overview.md)
+- `solvers.md`: Detailed documentation for ODE and DDE solvers. [Solvers](./solvers.md)
+- `initializers.md`: Documentation for initial condition setup. [Initializers](./initializers.md)
+- `network.md`: Documentation for network topology tools. [Network Topology](./network.md)
+- `models.md`: Documentation for implemented mathematical models. [Models](./models.md)
+- `utility.md`: Documentation for general utility functions. [Utility](./utility.md)
+- `linalg.md`: Documentation for linear algebra components. [Linear Algebra](./linalg.md)
+- `interpolators.md`: Documentation for interpolation methods. [Interpolators](./interpolators.md)
+- `typedefs.md`: Documentation for custom type definitions. [Type Definitions](./typedefs.md)
