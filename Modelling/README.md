@@ -38,15 +38,15 @@ Refer to the `Examples/` directory for various usage examples demonstrating how 
 
 This documentation is organized into several files to provide a clear and detailed explanation of each module:
 
-- `overview.md`: General introduction and library structure.
-- `solvers.md`: Detailed documentation for ODE and DDE solvers.
-- `initializers.md`: Documentation for initial condition setup.
-- `network.md`: Documentation for network topology tools.
-- `models.md`: Documentation for implemented mathematical models.
-- `utility.md`: Documentation for general utility functions.
-- `linalg.md`: Documentation for linear algebra components.
-- `interpolators.md`: Documentation for interpolation methods.
-- `typedefs.md`: Documentation for custom type definitions.
+- `overview.md`: General introduction and library structure. [Overview](docs/overview.md)
+- `solvers.md`: Detailed documentation for ODE and DDE solvers. [Solvers](docs/solvers.md)
+- `initializers.md`: Documentation for initial condition setup. [Initializers](docs/initializers.md)
+- `network.md`: Documentation for network topology tools. [Network](docs/network.md)
+- `models.md`: Documentation for implemented mathematical models. [Models](docs/models.md)
+- `utility.md`: Documentation for general utility functions. [Utility](docs/utility.md)
+- `linalg.md`: Documentation for linear algebra components. [Linear Algebra](docs/linalg.md)
+- `interpolators.md`: Documentation for interpolation methods. [Interpolators](docs/interpolators.md)
+- `typedefs.md`: Documentation for custom type definitions. [Type Definitions](docs/typedefs.md)
 
 ## Development Roadmap
 
