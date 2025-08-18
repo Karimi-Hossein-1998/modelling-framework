@@ -38,17 +38,17 @@ $$\large
 \mathbf{c} & \mathbf{A} \\[0.3cm]
 \hline %\\[0.1cm]
 \begin{matrix}
-0 \\[0.1cm]
-\frac{1}{2} \\[0.1cm]
-\frac{1}{2} \\[0.1cm]
-1 %\\[0.3cm]
+0                  \\[0.1cm]
+\frac{1}{2}       \\[0.1cm]
+\frac{1}{2}       \\[0.1cm]
+1                  %\\[0.3cm]
 \end{matrix}
 &
 \begin{matrix}
-0      & 0      & 0      & 0      \\[0.1cm]
-\frac{1}{2} & 0      & 0      & 0      \\[0.1cm]
-0      & \frac{1}{2} & 0      & 0      \\[0.1cm]
-0      & 0      & 1      & 0 %\\[0.3cm]
+0           & 0           & 0      & 0      \\[0.1cm]
+\frac{1}{2} & 0           & 0      & 0      \\[0.1cm]
+0           & \frac{1}{2} & 0      & 0      \\[0.1cm]
+0           & 0           & 1      & 0      %\\[0.3cm]
 \end{matrix} \\[0.3cm]
 \hline %\\[0.3cm]
 \mathbf{b} &
@@ -89,19 +89,47 @@ $$\beta_j = (-1)^j\int_0^1 \prod_{i=0,i\neq j}^{k-1} \frac{s+i}{j-i}ds$$
 
 #### 2.2.2 Adams-Moulton (Implicit)
 
-$$\mathbf{y}_{n+1} = \mathbf{y}_n + h\sum_{j=-1}^{k-1} \beta_j\mathbf{f}_{n-j}$$
+$$\mathbf{y}_{n+1} = \mathbf{y}_n + h\left(\beta_k \mathbf{f}_{n+1} + \sum_{j=0}^{k-1} \beta_j\mathbf{f}_{n-j}\right)$$
 
 ### 2.3 Stability Analysis
 
-#### 2.3.1 Characteristic Polynomial
+#### 2.3.1 Linear Stability Analysis
 
-$$\rho(\zeta) = \sum_{j=0}^k \alpha_j\zeta^j$$
+For the test equation $\mathbf{y}' = \lambda\mathbf{y}$, define:
 
-#### 2.3.2 Stability Region
+1. **Characteristic Polynomial**:
+   $$\rho(\zeta) = \sum_{j=0}^k \alpha_j\zeta^j$$
 
-For the test equation $\mathbf{y}' = \lambda\mathbf{y}$:
+2. **Stability Polynomial**:
+   $$\pi(\zeta,q) = \rho(\zeta) - q\sigma(\zeta)$$
+   where $q = h\lambda$ and $\sigma(\zeta) = \sum_{j=0}^k \beta_j\zeta^j$
 
-$$\sum_{j=0}^k (\alpha_j - h\lambda\beta_j)\zeta^j = 0$$
+3. **Root Condition**:
+   All roots $\zeta$ of $\pi(\zeta,q) = 0$ must satisfy $|\zeta| \leq 1$,
+   with $|\zeta| = 1$ only if $\zeta$ is a simple root.
+
+#### 2.3.2 Stability Regions
+
+1. **Definition**:
+   $$S = \{q \in \mathbb{C} : \text{method is stable for } h\lambda = q\}$$
+
+2. **Boundary Locus**:
+   $$\partial S = \{q \in \mathbb{C} : \pi(e^{i\theta},q) = 0 \text{ for some } \theta \in [0,2\pi]\}$$
+
+3. **A-Stability**:
+   Method is A-stable if $S \supset \mathbb{C}^-$
+
+#### 2.3.3 Practical Stability Considerations
+
+1. **Stiff Problems**:
+   - Use A-stable or A($\alpha$)-stable methods
+   - Monitor stability function evaluation
+   - Consider L-stability for severe stiffness
+
+2. **Variable Step Size**:
+   - Recompute stability parameters when step size changes
+   - Use stability-based step size control
+   - Monitor characteristic roots
 
 ## 3. Error Analysis and Control
 
@@ -127,8 +155,91 @@ where:
 For linear multistep methods:
 $$\mathbf{e}_{n+k} + \sum_{j=0}^{k-1} \alpha_j\mathbf{e}_{n+j} = h\sum_{j=0}^k \beta_j\left(\mathbf{f}(t_{n+j},\mathbf{y}(t_{n+j})) - \mathbf{f}(t_{n+j},\mathbf{y}_{n+j})\right) + h\tau_{n+k}$$
 
+## 4. Implementation Considerations
+
+### 4.1 Method Selection Guidelines
+
+1. **Non-stiff Problems**:
+   - Explicit RK methods (RK4, Dormand-Prince)
+   - Adams-Bashforth methods
+   - Consider embedded pairs for adaptivity
+
+2. **Stiff Problems**:
+   - Implicit RK methods (Radau IIA, SDIRK)
+   - Adams-Moulton methods
+   - BDF methods for severe stiffness
+
+### 4.2 Algorithmic Optimizations
+
+#### 4.2.1 Memory Management
+
+```cpp
+struct SolverState {
+    vector<Vector> y_history;    // Solution history
+    vector<Vector> f_history;    // Function evaluation history
+    vector<double> t_history;    // Time points
+    
+    // Circular buffer implementation
+    void push(const Vector& y, const Vector& f, double t) {
+        rotate(y_history.begin(), y_history.end()-1, y_history.end());
+        y_history[0] = y;
+        // Similar for f_history and t_history
+    }
+};
+```
+
+#### 4.2.2 Efficient Implementation Strategies
+
+1. **Stage Value Computations**:
+   - Reuse common terms in stage calculations
+   - Implement FSAL (First Same As Last) optimization
+   - Use workspace arrays effectively
+
+2. **Linear Algebra Operations**:
+   - Optimize matrix-vector products
+   - Use specialized solvers for linear systems
+   - Implement careful scaling strategies
+
+### 4.3 Advanced Error Control
+
+#### 4.3.1 PI Step Size Control
+
+More sophisticated step size control using PI-controller:
+
+$$h_{n+1} = h_n\left(\frac{\text{tol}}{\text{err}_n}\right)^{0.6/p}\left(\frac{\text{err}_{n-1}}{\text{err}_n}\right)^{0.2/p}$$
+
+#### 4.3.2 Error Estimation Strategies
+
+1. **Local Error Analysis**:
+   $$\text{err}_{\text{local}} = \|\mathbf{y}_{n+1} - \hat{\mathbf{y}}_{n+1}\|_{\text{scaled}}$$
+   where
+   $$\|\mathbf{v}\|_{\text{scaled}} = \sqrt{\frac{1}{d}\sum_{i=1}^d\left(\frac{v_i}{\text{atol}_i + \text{rtol}_i|y_i|}\right)^2}$$
+
+2. **Global Error Control**:
+   - Use Richardson extrapolation
+   - Implement deferred correction
+   - Monitor error accumulation
+
+### 4.4 Special Cases
+
+1. **Mass Matrices**:
+   $$\mathbf{M}\frac{d\mathbf{y}}{dt} = \mathbf{f}(t,\mathbf{y})$$
+
+   Require special treatment for:
+   - Singular mass matrices
+   - Time-dependent mass matrices
+   - Structure preservation
+
+2. **Conservation Laws**:
+   - Monitor conserved quantities
+   - Use geometric integrators
+   - Implement projection methods
+
 ## References
 
 1. Hairer, E., Nørsett, S. P., & Wanner, G. (1993). Solving Ordinary Differential Equations I.
 2. Butcher, J. C. (2008). Numerical Methods for Ordinary Differential Equations.
 3. Ascher, U. M., & Petzold, L. R. (1998). Computer Methods for Ordinary Differential Equations.
+4. Hairer, E., & Wanner, G. (1996). Solving Ordinary Differential Equations II.
+5. Gustafsson, K. (1991). Control theoretic techniques for stepsize selection in explicit Runge-Kutta methods.
+6. Söderlind, G. (2002). Automatic control and adaptive time-stepping.
