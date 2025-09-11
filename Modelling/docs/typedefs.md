@@ -1,6 +1,6 @@
 # Typedefs Module
 
-The `typedefs` module defines various type aliases and structures used throughout the Mathematical Modeling Toolkit library for clarity, convenience, and to manage complex number operations, solver parameters, and sparse data structures.
+The `typedefs` module defines various type aliases and structures used throughout the MyLib library for clarity, convenience, and to manage complex number operations, solver parameters, and sparse data structures.
 
 ## Core Type Aliases (`header.hpp`)
 
@@ -41,17 +41,17 @@ The adaptive solvers use sophisticated error estimation and step size control me
    - Mixed absolute/relative error control: $err_i = \frac{|y_i - \hat{y}_i|}{\max(|y_i|, \text{absolute\_tol})}$
 
 2. **Step Size Control Algorithm**:
-   ```
+
    1. Compute solution y and error estimate E
    2. Calculate error ratio r = ‖E‖/local_tol
    3. If r > 1 (error too large):
-      - New step = current_step * min(decrease_factor * (1/r)^(1/p), 1)
-      - Reject step and try again
+      - New step = current_step *min(decrease_factor* (1/r)^(1/p), 1)
+      - Reject step (previous step) and try again (with new step)
    4. If r < 1 (error acceptable):
       - Accept step
       - If r < 0.1 (error very small):
         New step = min(current_step * increase_factor, max_dt)
-   ```
+
    where p is the method order
 
 3. **Stability Considerations**:
@@ -216,12 +216,14 @@ where $x$ is the real part and $y$ is the imaginary part. Alternatively, it can 
 $z = r e^{iθ} = r(\cos θ + i\sin θ)$
 
 where:
+
 - $r = \sqrt{x^2 + y^2}$ is the magnitude (absolute value)
 - $θ = \arctan2(y, x)$ is the argument (phase angle)
 
 ### `Complex` Structure
 
 Implements a complex number using double-precision floating-point components, optimized for both numerical accuracy and computational efficiency. Special attention is paid to proper handling of:
+
 - Branch cuts for multi-valued functions
 - Overflow and underflow conditions
 - NaN and Infinity propagation
@@ -331,12 +333,14 @@ struct Complex {
 ### Core Operations
 
 #### Arithmetic Operations
+
 - Addition and subtraction: Direct component-wise operations
 - Multiplication: $(a + bi)(c + di) = (ac - bd) + (ad + bc)i$
 - Division: $\frac{a + bi}{c + di} = \frac{(ac + bd) + (bc - ad)i}{c^2 + d^2}$
   - Implements Smith's algorithm for improved numerical stability
 
 #### Essential Functions
+
 - Conjugate: $\overline{z} = x - yi$
 - Magnitude: $|z| = \sqrt{x^2 + y^2}$
   - Uses hypot() for better numerical stability
@@ -346,34 +350,40 @@ struct Complex {
 ### Transcendental Functions
 
 #### Exponential and Logarithm
+
 - Complex exponential: $e^{x+yi} = e^x(\cos y + i\sin y)$
 - Complex logarithm: $\ln(z) = \ln|z| + i\arg(z)$
   - Branch cut along negative real axis
   - Principal branch: $-π < \Im(\ln z) ≤ π$
 
 #### Trigonometric Functions
+
 - Sine: $\sin(z) = \frac{e^{iz} - e^{-iz}}{2i}$
 - Cosine: $\cos(z) = \frac{e^{iz} + e^{-iz}}{2}$
 - Tangent: $\tan(z) = \frac{\sin(z)}{\cos(z)}$
   - Careful handling near poles at $z = \frac{π}{2} + πn$
 
 #### Inverse Trigonometric Functions
+
 - Arcsine: Principal branch in $[-\frac{π}{2}, \frac{π}{2}]$
 - Arccosine: Principal branch in $[0, π]$
 - Arctangent: Principal branch in $(-\frac{π}{2}, \frac{π}{2})$
 
 #### Hyperbolic Functions
+
 - Sinh: $\sinh(z) = \frac{e^z - e^{-z}}{2}$
 - Cosh: $\cosh(z) = \frac{e^z + e^{-z}}{2}$
 - Tanh: $\tanh(z) = \frac{\sinh(z)}{\cosh(z)}$
 
 #### Power Functions
+
 - Integer powers: Optimized multiplication sequence
 - Complex powers: $z^w = e^{w\ln(z)}$
   - Branch cut handling for fractional powers
 - Square root: Principal branch with cut along negative real axis
 
 ### Utility Functions
+
 - String formatting with controllable precision
 - Conversion to/from string representations
 - NaN and Infinity checking
