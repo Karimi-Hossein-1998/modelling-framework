@@ -1,6 +1,6 @@
 # Typedefs Module
 
-The `typedefs` module defines various type aliases and structures used throughout the MyLib library for clarity, convenience, and to manage complex number operations, solver parameters, and sparse data structures.
+The `typedefs` module defines various type aliases and structures used throughout the Mathematical Modeling Toolkit library for clarity, convenience, and to manage complex number operations, solver parameters, and sparse data structures.
 
 ## Core Type Aliases (`header.hpp`)
 

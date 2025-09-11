@@ -1,4 +1,4 @@
-# MyLib Development Roadmap
+# Mathematical Modeling Toolkit Development Roadmap
 
 ## Phase 1: Advanced DDE Features (Q3-Q4 2025)
 

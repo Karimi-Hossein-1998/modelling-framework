@@ -1,6 +1,6 @@
-# MyLib: A C++ Library for Scientific Computing
+# Mathematical Modeling Toolkit: A C++ Library for Scientific Computing
 
-MyLib is a comprehensive C++ library designed for scientific computing, offering a collection of tools for solving ordinary differential equations (ODEs), delay differential equations (DDEs), network topology generation, and various linear algebra operations. The library is structured to be modular, allowing users to easily integrate specific components into their projects.
+Mathematical Modeling Toolkit is a comprehensive C++ library designed for scientific computing, offering a collection of tools for solving ordinary differential equations (ODEs), delay differential equations (DDEs), network topology generation, and various linear algebra operations. The library is structured to be modular, allowing users to easily integrate specific components into their projects.
 
 ## Core Components
 
@@ -17,10 +17,10 @@ The library is organized into several key modules:
 
 ## Getting Started
 
-To use MyLib, include the necessary header files in your C++ project. The main header file, `mylib.hpp`, provides a convenient way to include all core components:
+To use Mathematical Modeling Toolkit, include the necessary header files in your C++ project. The main header file, `mm.hpp`, provides a convenient way to include all core components:
 
 ```cpp
-#include "mylib.hpp"
+#include "mm.hpp"
 ```
 
 For specific functionalities, you can include individual headers, for example (note: these headers may change as the library evolves and you need to make sure the paths are all relative):

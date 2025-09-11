@@ -1,6 +1,6 @@
 # Mathematical Foundations
 
-This document establishes the mathematical notation and conventions used throughout the MyLib documentation. All modules follow these conventions for consistency.
+This document establishes the mathematical notation and conventions used throughout the Mathematical Modeling Toolkit documentation. All modules follow these conventions for consistency.
 
 ## Notation Conventions
 
