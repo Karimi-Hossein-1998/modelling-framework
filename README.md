@@ -51,3 +51,31 @@ This documentation is organized into several files to provide a clear and detail
 ## Development Roadmap
 
 For a detailed plan of future additions and features, please refer to the [Development Roadmap](Modelling/docs/roadmap.md).
+
+# Contributing to the Mathematical Modeling Toolkit
+
+Thank you for your interest in contributing. This project is built on a foundation of **honesty, practicality, theoretical integrity, correctness (rigor),** and **clean code**. Our goal is to create a robust and reliable toolkit for scientific computing, and all contributions are valued based on their technical merit and adherence to these principles.
+
+---
+
+### How Can I Contribute?
+
+There are many ways to contribute to this project, and not all of them require writing code. Here are some options:
+
+* **Report a Bug**: If you find an issue, please report it on the [Issues](https://github.com/Karimi-Hossein-1998/modelling-framework/issues) page. Provide a clear, concise description, including steps to reproduce the bug, so that we can verify and address the problem efficiently.
+* **Suggest an Enhancement**: Have an idea for a new feature? We'd be glad to discuss it. Open an issue to propose your idea, explaining its practicality and theoretical basis.
+* **Improve Documentation**: Clarity and correctness are paramount. If you find documentation that is unclear, inaccurate, or could be improved, please let us know.
+* **Contribute Code**: If you're ready to contribute code, we welcome your work on existing issues or new features.
+
+---
+
+### Submitting a Pull Request
+
+If you are contributing code, please ensure your work aligns with our core principles. Follow these steps:
+
+1.  **Fork the Repository**: Create a copy of the project in your own GitHub account.
+2.  **Create a New Branch**: Make a new branch for your feature or bug fix: `git checkout -b feature/your-feature-name`.
+3.  **Code with Rigor**: Write code that is clean, efficient, and well-commented. All new code must be theoretically sound and free of sloppy implementation.
+4.  **Write Tests**: All new functionality must be accompanied by comprehensive tests to ensure its correctness and integrity.
+5.  **Commit Your Changes**: Write clear and descriptive commit messages. Explain **what** you changed and, more importantly, **why** you changed it.
+6.  **Push and Submit**: Push your branch to your forked repository and submit a pull request. In the pull request description, reference the issue it addresses and provide a brief summary of your changes.
