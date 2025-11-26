@@ -1,0 +1,64 @@
+# Some exceptions (Do Not Ignore)
+
+!./Modeling/includes/miscellany/*
+!*.hpp
+!*.md
+
+
+
+# Ignore all directories with just numerical names
+[0-9]*/
+
+# Ignore all directories including "run" in their name
+*run*/
+
+# Ignore all directories including "test" in their name
+*test*/
+
+*python*/
+# Ignore any directories including "build"
+*build*/
+
+# Ignore files with specified formats
+*.txt
+*.tsv
+*.png
+*.jpg
+*.jpeg
+*.csv
+*.exe
+*.out
+*.log
+*.json
+*.spec
+*.7z
+*.rar
+*.zip
+*.tar.gz
+*.ipynb
+*.julia
+*.gz
+*.pdf
+*.PDF
+*.epub
+*.docx
+*.msix
+*.iso
+*.ignore
+*.yaml
+*.py
+# Ignore directories starting with a dot (log/cache related)
+.*
+.*/
+*cache*/
+
+# Some miscellaneous files/directories
+Dockerfile
+
+# Some exceptions (Do Not Ignore)
+
+!.gitignore
+!./Modeling/*
+!*.hpp
+!*.md
+!*.cpp

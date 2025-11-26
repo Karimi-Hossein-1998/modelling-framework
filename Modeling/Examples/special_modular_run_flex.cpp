@@ -47,7 +47,7 @@ struct SpecialModularRunParams
     size_t num_threads = 7;
 
     // precision / io options
-    std::string file_precision = "6";
+    std::string file_precision = "11";
     std::string file_format    = "fixed";
 
     SpecialModularRunParams()
